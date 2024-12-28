@@ -23,9 +23,7 @@ public class CurrencyExchange {
 
         double fromRate = exchangeRates.get(fromCurrency);
         double toRate = exchangeRates.get(toCurrency);
-        double convertedAmount = (amount / fromRate) * toRate;
-
-        return convertedAmount;
+        return (amount / fromRate) * toRate;
     }
 
     public static double calculateFee(double amount) {
