@@ -1,9 +1,11 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.text.DecimalFormat;
 
 public class CurrencyExchange {
     private static final double MIN_AMOUNT = 250;
     private static final double MAX_AMOUNT = 10000;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     private static final Map<String, Double> exchangeRates = new HashMap<>();
 
@@ -44,7 +46,7 @@ public class CurrencyExchange {
         double convertedAmount = convertCurrency(fromCurrency, toCurrency, amount);
         double fee = calculateFee(amount);
 
-        System.out.println("Converted Amount: " + convertedAmount);
-        System.out.println("Transaction Fee: " + fee);
+        System.out.println("Converted Amount: " + df.format(convertedAmount));
+        System.out.println("Transaction Fee: " + df.format(fee));
     }
 }
