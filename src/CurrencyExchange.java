@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.text.DecimalFormat;
 
 public class CurrencyExchange {
@@ -39,9 +40,18 @@ public class CurrencyExchange {
     }
 
     public static void main(String[] args) {
-        String fromCurrency = "USD";
-        String toCurrency = "EUR";
-        double amount = 1000;
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter base currency (e.g., GBP, USD, EUR, JPY, CAD, AUD): ");
+        String fromCurrency = scanner.next().toUpperCase();
+
+        System.out.println("Enter target currency (e.g., GBP, USD, EUR, JPY, CAD, AUD): ");
+        String toCurrency = scanner.next().toUpperCase();
+
+        System.out.println("Enter amount to convert: ");
+        double amount = scanner.nextDouble();
+
+        scanner.close();
 
         double convertedAmount = convertCurrency(fromCurrency, toCurrency, amount);
         double fee = calculateFee(amount);
