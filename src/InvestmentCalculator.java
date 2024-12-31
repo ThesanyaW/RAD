@@ -1,5 +1,4 @@
 import java.text.DecimalFormat;
-import java.util.Scanner;
 
 public class InvestmentCalculator {
     public static final DecimalFormat df = new DecimalFormat("0.00");

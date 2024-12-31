@@ -1,7 +1,11 @@
 import java.util.Scanner;
 import javax.crypto.SecretKey;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main {
+    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -47,8 +51,8 @@ public class Main {
         double convertedAmount = CurrencyExchange.convertCurrency(fromCurrency, toCurrency, amount);
         double fee = CurrencyExchange.calculateFee(amount);
 
-        System.out.println("Converted Amount: " + CurrencyExchange.df.format(convertedAmount));
-        System.out.println("Transaction Fee: " + CurrencyExchange.df.format(fee));
+        System.out.println("Converted Amount: " + CurrencyExchange.getDecimalFormat().format(convertedAmount));
+        System.out.println("Transaction Fee: " + CurrencyExchange.getDecimalFormat().format(fee));
     }
 
     private static void handleInvestmentCalculator(Scanner scanner) {
@@ -130,11 +134,10 @@ public class Main {
             System.out.println("Enter email: ");
             String email = scanner.next();
 
-            // Assuming you have methods to store and retrieve user profiles
-            // ClientDataManager.storeUserProfile(name, email, encryptedData);
-            // ClientDataManager.retrieveUserProfile(email);
+            ClientDataManager.storeUserProfile(name, email, encryptedData);
+            ClientDataManager.retrieveUserProfile(email);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "An error occurred", e);
         }
     }
 }

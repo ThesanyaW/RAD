@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.text.DecimalFormat;
 
 public class CurrencyExchange {
