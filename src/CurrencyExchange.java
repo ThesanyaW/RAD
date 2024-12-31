@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 public class CurrencyExchange {
     private static final double MIN_AMOUNT = 250;
     private static final double MAX_AMOUNT = 10000;
-    public static final DecimalFormat df = new DecimalFormat("0.00");
+    public static final DecimalFormat df = new DecimalFormat("0.00"); // Changed to public
 
     private static final Map<String, Double> exchangeRates = new HashMap<>();
 
