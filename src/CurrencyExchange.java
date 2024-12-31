@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 public class CurrencyExchange {
     private static final double MIN_AMOUNT = 250;
     private static final double MAX_AMOUNT = 10000;
-    private static final DecimalFormat df = new DecimalFormat("0.00");
+    public static final DecimalFormat df = new DecimalFormat("0.00");
 
     private static final Map<String, Double> exchangeRates = new HashMap<>();
 
@@ -37,26 +37,5 @@ public class CurrencyExchange {
         } else {
             return amount * 0.02;
         }
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter base currency (e.g., GBP, USD, EUR, JPY, CAD, AUD): ");
-        String fromCurrency = scanner.next().toUpperCase();
-
-        System.out.println("Enter target currency (e.g., GBP, USD, EUR, JPY, CAD, AUD): ");
-        String toCurrency = scanner.next().toUpperCase();
-
-        System.out.println("Enter amount to convert: ");
-        double amount = scanner.nextDouble();
-
-        scanner.close();
-
-        double convertedAmount = convertCurrency(fromCurrency, toCurrency, amount);
-        double fee = calculateFee(amount);
-
-        System.out.println("Converted Amount: " + df.format(convertedAmount));
-        System.out.println("Transaction Fee: " + df.format(fee));
     }
 }

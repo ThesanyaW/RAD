@@ -7,17 +7,6 @@ import java.util.Base64;
 public class ClientDataManager {
     private static final String ALGORITHM = "AES";
 
-    public static void main(String[] args) throws Exception {
-        String data = "Sensitive Data";
-        SecretKey secretKey = generateKey();
-
-        String encryptedData = encrypt(data, secretKey);
-        System.out.println("Encrypted Data: " + encryptedData);
-
-        String decryptedData = decrypt(encryptedData, secretKey);
-        System.out.println("Decrypted Data: " + decryptedData);
-    }
-
     public static SecretKey generateKey() throws Exception {
         KeyGenerator keyGen = KeyGenerator.getInstance(ALGORITHM);
         keyGen.init(256, new SecureRandom());
