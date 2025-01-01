@@ -15,14 +15,18 @@ public class ClientDataManager {
 
     public static void main(String[] args) {
         try {
-            String data = "Sensitive Data";
+            String name = "John Doe";
+            String nic = "123456789V";
+            String email = "john.doe@example.com";
             SecretKey secretKey = generateKey();
 
-            String encryptedData = encrypt(data, secretKey);
-            System.out.println("Encrypted Data: " + encryptedData);
+            String encryptedName = encrypt(name, secretKey);
+            String encryptedNic = encrypt(nic, secretKey);
+            String encryptedEmail = encrypt(email, secretKey);
 
-            String decryptedData = decrypt(encryptedData, secretKey);
-            System.out.println("Decrypted Data: " + decryptedData);
+            System.out.println("Client Data Successfully Encrypted");
+
+            storeUserProfile(encryptedName, encryptedNic, encryptedEmail);
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "An error occurred", e);
         }
@@ -41,15 +45,8 @@ public class ClientDataManager {
         return Base64.getEncoder().encodeToString(encryptedBytes);
     }
 
-    public static String decrypt(String encryptedData, SecretKey key) throws Exception {
-        Cipher cipher = Cipher.getInstance(ALGORITHM);
-        cipher.init(Cipher.DECRYPT_MODE, key);
-        byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedData));
-        return new String(decryptedBytes);
-    }
-
-    public static void storeUserProfile(String name, String email, String encryptedData) {
-        userProfiles.put(email, "Name: " + name + ", Encrypted Data: " + encryptedData);
+    public static void storeUserProfile(String name, String nic, String email) {
+        userProfiles.put(email, "Name: " + name + ", NIC: " + nic + ", Email: " + email);
         System.out.println("User profile stored successfully.");
     }
 

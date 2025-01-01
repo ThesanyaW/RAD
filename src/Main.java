@@ -14,7 +14,8 @@ public class Main {
             System.out.println("1. Currency Exchange");
             System.out.println("2. Investment Calculator");
             System.out.println("3. Client Data Manager");
-            System.out.println("4. Exit");
+            System.out.println("4. Query User Profile");
+            System.out.println("5. Exit");
 
             int choice = scanner.nextInt();
 
@@ -29,6 +30,9 @@ public class Main {
                     handleClientDataManager(scanner);
                     break;
                 case 4:
+                    queryUserProfile(scanner);
+                    break;
+                case 5:
                     System.out.println("Exiting...");
                     scanner.close();
                     return;
@@ -119,26 +123,30 @@ public class Main {
         try {
             SecretKey secretKey = ClientDataManager.generateKey();
 
-            System.out.println("Enter data to encrypt: ");
-            String data = scanner.next();
-
-            String encryptedData = ClientDataManager.encrypt(data, secretKey);
-            System.out.println("Encrypted Data: " + encryptedData);
-
-            String decryptedData = ClientDataManager.decrypt(encryptedData, secretKey);
-            System.out.println("Decrypted Data: " + decryptedData);
-
-            System.out.println("Enter name: ");
+            System.out.println("Enter client name: ");
             String name = scanner.next();
 
-            System.out.println("Enter email: ");
+            System.out.println("Enter client NIC: ");
+            String nic = scanner.next();
+
+            System.out.println("Enter client email: ");
             String email = scanner.next();
 
-            // Assuming you have methods to store and retrieve user profiles
-            ClientDataManager.storeUserProfile(name, email, encryptedData);
-            ClientDataManager.retrieveUserProfile(email);
+            String encryptedName = ClientDataManager.encrypt(name, secretKey);
+            String encryptedNic = ClientDataManager.encrypt(nic, secretKey);
+            String encryptedEmail = ClientDataManager.encrypt(email, secretKey);
+
+            System.out.println("Client Data Successfully Encrypted");
+
+            ClientDataManager.storeUserProfile(encryptedName, encryptedNic, encryptedEmail);
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "An error occurred", e);
         }
+    }
+
+    private static void queryUserProfile(Scanner scanner) {
+        System.out.println("Enter client email to query: ");
+        String email = scanner.next();
+        ClientDataManager.retrieveUserProfile(email);
     }
 }
